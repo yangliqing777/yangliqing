@@ -1,7 +1,7 @@
 # 杨靖 | 中国科学技术大学计算机专业硕士 | 云计算、AI Infra 方向
 
 
-[Email](mailto:yangliqing777@email.com) · [LinkedIn](#) · [简历 PDF](./assets/杨靖_简历.pdf)
+[Email](yangliqing777@gmail.com)  · [简历 PDF](./assets/杨靖_简历.pdf)
 > Building reliable, high-perf AI/Cloud infra at scale. 
 
 ## 🎯 求职意向（2027届/实习 & 校招）
