@@ -5,6 +5,7 @@
 # 0. 清单与前置
 Inventory 示例（hosts_510.ini）：
 ```
+#hosts_510.ini
 
 [all]
 10.19.0.[1:64]
@@ -27,6 +28,8 @@ ansible_python_interpreter=/usr/bin/python3
 
 # 1. 传输文件
 ```
+#push.yml
+
 - hosts: source
   gather_facts: no
   vars:
@@ -96,6 +99,7 @@ ansible-playbook -i ./ini/hosts_510ini ./yml/push.yml -f 8
 
 # 2. 环境安装（OFED → Driver → CUDA → FabricManager）
 ```
+#suite.sh
 #!/bin/bash
 set -euo pipefail
 
@@ -228,6 +232,7 @@ echo "ALL Down"
       when: run_status == 'FAILED'
 
 ```
+执行:
 ```
 ansible-playbook -i ./ini/hosts_510.ini ./yml/run_suite.yml -f 510
 ```
@@ -235,6 +240,8 @@ ansible-playbook -i ./ini/hosts_510.ini ./yml/run_suite.yml -f 510
 
 # 3. SSH 免密（收集→合并→分发）
 ```
+#ssh.yml
+
 - name: Collect and distribute SSH authorized_keys from source host
   hosts: "{{ target_group | default('all') }}"
   gather_facts: false
@@ -313,6 +320,8 @@ ansible-playbook -i ./ini/hosts_510.ini ./yml/ssh.yml -f 510
 # 4. 关闭指纹校验 & 防火墙
 
 ```
+#diable.yml
+
 - hosts: all
   gather_facts: no
   become: true
@@ -349,6 +358,8 @@ ansible-playbook -i ./ini/hosts_8back.ini ./yml/disable.yml -f 8
 # 5. 写入环境变量 LD_LIBRARY_PATH
 
 ```
+#library.yml
+
 - hosts: all
   gather_facts: no
   become: true
@@ -374,7 +385,10 @@ ansible-playbook -i ./ini/hosts_8back.ini ./yml/disable.yml -f 8
         state: present
 
 ```
-
+执行：
+```
+ansible-playbook -i ./ini/hosts_8back.ini ./yml/library.yml -f 8
+```
 
 
 # 6. 编译 NCCL / nccl-tests / SHARP
@@ -457,7 +471,11 @@ yml/nccl_nvls.yml（NVLS 开启）：
       poll: "{{ poll_interval }}"
       register: run_nvls_on
 ```
-
+### 主要工作：跑两遍NCCL，一遍开NVLS，一遍不开NVLS，输出日志写入/var/log/ansible/nccl
+执行:
+```
+ansible-playbook -i ./ini/hosts_8back.ini ./yml/nccl_nvls.yml -f 8
+```
 
 # 8. 多机 NCCL（OpenMPI）
 ```
