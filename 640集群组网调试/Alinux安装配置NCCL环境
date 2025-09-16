@@ -1,4 +1,4 @@
-装机日志（批量分发 · 环境安装 · SSH 免密 · 防火墙关闭 · 环境变量 · 编译与压测）
+# 装机日志（批量分发 · 环境安装 · SSH 免密 · 防火墙关闭 · 环境变量 · 编译与测试）
 
 适用：AliOS/alinux 系环境；批量分发文件，安装 OFED / NVIDIA Driver / CUDA / Fabric Manager；配置 SSH 免密与防火墙；写入库路径；编译 NCCL / nccl-tests / SHARP；单机 & 多机 NCCL 基线
 
