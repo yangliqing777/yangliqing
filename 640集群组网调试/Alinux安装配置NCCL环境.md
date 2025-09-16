@@ -155,7 +155,7 @@ yum --disablerepo="*" --enablerepo="alios" -y install nvidia-fabric-manager
 systemctl enable --now nvidia-fabricmanager
 echo "ALL Down"
 ```
-主要工作：安装工具包、OFED、NVIDIA Driver、CUDA、fabircmanager
+### 主要工作：安装工具包、OFED、NVIDIA Driver、CUDA、fabircmanager
 ```
 # run_suite.yml
 - hosts: localhost
@@ -233,7 +233,7 @@ ansible-playbook -i ./ini/hosts_510.ini ./yml/run_suite.yml -f 510
 ```
 
 
-#3. SSH 免密（收集→合并→分发）
+# 3. SSH 免密（收集→合并→分发）
 ```
 - name: Collect and distribute SSH authorized_keys from source host
   hosts: "{{ target_group | default('all') }}"
@@ -310,7 +310,7 @@ ansible-playbook -i ./ini/hosts_510.ini ./yml/ssh.yml -f 510
 ```
 
 
-#4. 关闭指纹校验 & 防火墙
+# 4. 关闭指纹校验 & 防火墙
 
 ```
 - hosts: all
@@ -346,7 +346,7 @@ ansible-playbook -i ./ini/hosts_8back.ini ./yml/disable.yml -f 8
 
 
 
-#5. 写入环境变量 LD_LIBRARY_PATH
+# 5. 写入环境变量 LD_LIBRARY_PATH
 
 ```
 - hosts: all
@@ -377,7 +377,7 @@ ansible-playbook -i ./ini/hosts_8back.ini ./yml/disable.yml -f 8
 
 
 
-#6. 编译 NCCL / nccl-tests / SHARP
+# 6. 编译 NCCL / nccl-tests / SHARP
 ```
 - hosts: all
   gather_facts: no
@@ -428,7 +428,7 @@ ansible-playbook -i ./ini/hosts_8back.ini ./yml/build_nccl_all.yml -f 8
 ```
 
 
-#7. 单机 NCCL（对比 NVLS=1/0）
+# 7. 单机 NCCL（对比 NVLS=1/0）
 ```
 yml/nccl_nvls.yml（NVLS 开启）：
 
@@ -459,7 +459,7 @@ yml/nccl_nvls.yml（NVLS 开启）：
 ```
 
 
-#8. 多机 NCCL（OpenMPI）
+# 8. 多机 NCCL（OpenMPI）
 ```
 time /usr/mpi/gcc/openmpi-4.1.7rc1/bin/mpirun \
 -host 10.19.5.168,10.19.5.169 \
